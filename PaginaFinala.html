@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<title>Rezultat</title>
+<style>
+  body { background:#111; color:white; font-family:Arial; padding:20px; }
+  .card { background:#1e1e1e; padding:20px; border-radius:10px; max-width:600px; margin:auto; text-align:center; }
+  h1 { color:#4CAF50; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Rezultatul tău</h1>
+  <h2 id="rezultat"></h2>
+</div>
+
+<script>
+let score = 0;
+
+// răspunsurile corecte
+if (localStorage.getItem("q1") == 1) score++;
+if (localStorage.getItem("q2") == 0) score++;
+if (localStorage.getItem("q3") == 0) score++;
+
+document.getElementById("rezultat").innerText =
+  "Ai obținut " + score + " din 3 puncte!";
+</script>
+
+</body>
+</html>
