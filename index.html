@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<title>Test ESP-Rover</title>
+<style>
+  body { font-family: Arial; background:#f5f5f5; padding:20px; }
+  .card { background:white; padding:20px; border-radius:10px; max-width:600px; margin:auto; }
+  .hidden { display:none; }
+  button { padding:10px 20px; margin-top:20px; border:none; border-radius:8px; background:#4CAF50; color:white; cursor:pointer; }
+  button:hover { background:#45a049; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2 id="question"></h2>
+  <div id="answers"></div>
+  <button id="nextBtn" onclick="nextQuestion()">Următoarea</button>
+  <button id="submitBtn" class="hidden" onclick="finishTest()">Trimite</button>
+  <h3 id="result" class="hidden"></h3>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "Ce microcontroller folosește ESP-Rover?",
+    a: ["ESP8266", "ESP32", "Arduino Nano"],
+    correct: 1
+  },
+  {
+    q: "Ce tip de conexiune folosește pentru comenzi?",
+    a: ["WiFi", "BLE", "IR"],
+    correct: 1
+  },
+  {
+    q: "Ce poate măsura senzorul MQ?",
+    a: ["Gaz", "Temperatură", "Luminozitate"],
+    correct: 0
+  },
+  {
+    q: "Ce face senzorul GP2Y10?",
+    a: ["Măsoară praf", "Măsoară distanța", "Măsoară sunet"],
+    correct: 0
+  },
+  {
+    q: "Ce rol are BMP180?",
+    a: ["Presiune și temperatură", "Umiditate", "Vibrații"],
+    correct: 0
+  }
+];
+
+let index = 0;
+let score = 0;
+
+function loadQuestion() {
+  const q = questions[index];
+  document.getElementById("question").innerText = q.q;
+
+  const answersDiv = document.getElementById("answers");
+  answersDiv.innerHTML = "";
+
+  q.a.forEach((ans, i) => {
+    answersDiv.innerHTML += `
+      <label>
+        <input type="radio" name="answer" value="${i}"> ${ans}
+      </label><br>
+    `;
+  });
+
+  document.getElementById("nextBtn").classList.remove("hidden");
+  document.getElementById("submitBtn").classList.add("hidden");
+}
+
+function nextQuestion() {
+  const selected = document.querySelector('input[name="answer"]:checked');
+  if (!selected) return alert("Alege un răspuns!");
+
+  if (parseInt(selected.value) === questions[index].correct) score++;
+
+  index++;
+
+  if (index < questions.length) {
+    loadQuestion();
+  } else {
+    document.getElementById("nextBtn").classList.add("hidden");
+    document.getElementById("submitBtn").classList.remove("hidden");
+  }
+}
+
+function finishTest() {
+  document.getElementById("result").innerText = 
+    "Ai obținut " + score + " din " + questions.length + " puncte!";
+  document.getElementById("result").classList.remove("hidden");
+  document.getElementById("answers").classList.add("hidden");
+  document.getElementById("question").classList.add("hidden");
+  document.getElementById("submitBtn").classList.add("hidden");
+}
+loadQuestion();
+</script>
+
+</body>
+</html>
