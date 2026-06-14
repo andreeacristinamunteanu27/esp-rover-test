@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<title>ESP‑Rover – Grafice Live Glow Neon</title>
+
+<style>
+  body {
+    background: #050009;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 32px;
+    color: #00FFFF;
+    text-shadow: 0 0 10px #00FFFF, 0 0 20px #5500FF;
+    margin-bottom: 40px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1300px;
+    margin: auto;
+  }
+
+  .card {
+    background: #0A0014;
+    padding: 20px;
+    border-radius: 16px;
+    border: 2px solid #5500FF;
+    box-shadow: 0 0 25px #5500FF, 0 0 45px #00FFFF;
+  }
+
+  .card h3 {
+    margin-top: 0;
+    color: #00FFFF;
+    text-shadow: 0 0 10px #00FFFF;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  iframe {
+    width: 100%;
+    height: 260px;
+    border: none;
+    border-radius: 12px;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>ESP‑Rover – Grafice Live Glow Neon</h1>
+
+<div class="grid">
+
+  <div class="card">
+    <h3>MQ Gas Sensor</h3>
+    <iframe src="https://thingspeak.com/channels/3407336/charts/1?bgcolor=%230A0014&color=%2300FFFF&dynamic=true&type=line&gridcolor=%235500FF&axescolor=%23FFFFFF&linewidth=4"></iframe>
+  </div>
+
+  <div class="card">
+    <h3>Temperatură BMP180</h3>
+    <iframe src="https://thingspeak.com/channels/3407336/charts/2?bgcolor=%230A0014&color=%2300FFFF&dynamic=true&type=line&gridcolor=%235500FF&axescolor=%23FFFFFF&linewidth=4"></iframe>
+  </div>
+
+  <div class="card">
+    <h3>Presiune BMP180</h3>
+    <iframe src="https://thingspeak.com/channels/3407336/charts/3?bgcolor=%230A0014&color=%2300FFFF&dynamic=true&type=line&gridcolor=%235500FF&axescolor=%23FFFFFF&linewidth=4"></iframe>
+  </div>
+
+  <div class="card">
+    <h3>Altitudine BMP180</h3>
+    <iframe src="https://thingspeak.com/channels/3407336/charts/4?bgcolor=%230A0014&color=%2300FFFF&dynamic=true&type=line&gridcolor=%235500FF&axescolor=%23FFFFFF&linewidth=4"></iframe>
+  </div>
+
+</div>
+
+</body>
+</html>
