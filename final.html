@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<title>Rezultat Test</title>
+
+<style>
+  body {
+    background: #f5faff;
+    color: #003049;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  h1 { color: #2ecc71; font-size: 42px; margin-bottom: 10px; }
+
+  #score-box {
+    font-size: 32px;
+    font-weight: bold;
+    color: #0077b6;
+    margin-top: 20px;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: pop 1s forwards ease-out;
+  }
+
+  @keyframes pop {
+    0% { opacity: 0; transform: scale(0.5); }
+    60% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .btn {
+    background: #0077b6;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 40px;
+    display: inline-block;
+  }
+  .btn:hover { background: #005f8a; }
+</style>
+</head>
+
+<body>
+
+<h1>Test finalizat!</h1>
+<p>Felicitări! Ai completat testul ESP‑Rover.</p>
+
+<div id="score-box"></div>
+
+<a class="btn" href="index.html">Înapoi la Home</a>
+
+<script>
+const score = localStorage.getItem("score") || 0;
+document.getElementById("score-box").innerText = `Punctaj: ${score} / 5`;
+</script>
+
+</body>
+</html>
