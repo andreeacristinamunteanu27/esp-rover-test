@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<title>Date ESP‑Rover</title>
+
+<style>
+  body {
+    background: #f5faff;
+    color: #003049;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #0077b6;
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  .table-container {
+    max-width: 1100px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-left: 6px solid #2ecc71;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+
+  th {
+    background: #0077b6;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  td {
+    padding: 10px;
+    border-bottom: 1px solid #e6e6e6;
+    font-size: 14px;
+  }
+
+  tr:hover {
+    background: #e8f8ff;
+  }
+
+  .loading {
+    text-align: center;
+    font-size: 18px;
+    color: #0077b6;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>Date brute ESP‑Rover</h1>
+
+<div class="table-container">
+  <div id="loading" class="loading">Se încarcă datele...</div>
+  <table id="data-table" style="display:none;">
+    <thead>
+      <tr>
+        <th>Timp</th>
+        <th>MQ Gas</th>
+        <th>Temperatură</th>
+        <th>Presiune</th>
+        <th>Altitudine</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+</div>
+
+<script>
+  fetch("https://api.thingspeak.com/channels/3407336/feeds.json?results=8000")
+    .then(response => response.json())
+    .then(data => {
+      const tbody = document.getElementById("table-body");
+      const table = document.getElementById("data-table");
+      const loading = document.getElementById("loading");
+
+      data.feeds.forEach(entry => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${entry.created_at.replace("T", " ").replace("Z", "")}</td>
+          <td>${entry.field1 || "-"}</td>
+          <td>${entry.field2 || "-"}</td>
+          <td>${entry.field3 || "-"}</td>
+          <td>${entry.field4 || "-"}</td>
+        `;
+
+        tbody.appendChild(row);
+      });
+
+      loading.style.display = "none";
+      table.style.display = "table";
+    });
+</script>
+
+</body>
+</html>
